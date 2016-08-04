@@ -1,0 +1,31 @@
+_repo: Spinifex-and-Sand--13-A-Narrative-of-Five-Years-Pioneering-and-Exploration-in-Western-Ausralia_4975
+_version: 0.0.1
+creator:
+  author:
+    agent_name: Carnegie, David Wynford
+    birthdate: 1871
+    deathdate: 1900
+    gutenberg_agent_id: '1612'
+    url: http://www.gutenberg.org/2009/agents/1612
+    wikipedia: http://en.wikipedia.org/wiki/David_Carnegie_%28explorer%29
+description: ''
+gutenberg_bookshelf:
+- Australia
+- Western
+gutenberg_issued: '2004-01-01'
+gutenberg_type: Text
+identifiers:
+  gutenberg: '4975'
+language: en
+publisher: Project Gutenberg
+rights: Public domain in the USA.
+rights_url: http://creativecommons.org/about/pdm
+subjects:
+- !lcsh 'Western Australia -- Description and travel'
+- !lcc 'DU'
+- !lcsh 'Carnegie, David Wynford, 1871-1900'
+- !lcsh 'Gold mines and mining -- Australia -- Western Australia'
+- GITenberg
+title: "Spinifex and Sand\r\nA Narrative of Five Years' Pioneering and Exploration\
+  \ in Western Ausralia"
+url: http://www.gutenberg.org/ebooks/4975
