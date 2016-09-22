@@ -1,0 +1,61 @@
+sudo: required
+dist: trusty
+language: ruby
+
+before_install:
+before_install:
+- gem install asciidoctor -v 1.5.2
+- gem install tilt
+- sudo pip install git+https://github.com/gitenberg-dev/gitberg
+- sudo pip install pillow
+- sudo pip install cssutils
+- sudo pip install docutils
+- sudo pip install roman
+- sudo pip install git+https://github.com/gitenberg-dev/pg-epubmaker
+script:
+- VERSION=`ruby -e "require 'yaml'; meta = YAML.load_file('metadata.yaml'); puts meta['_version'];"`
+- git clone https://github.com/gitenberg-dev/asciidoctor-htmlbook.git
+- sudo pip install -r asciidoctor-htmlbook/gitberg-machine/requirements.txt
+
+- /usr/bin/python -c "from gitenberg import travis; travis.build_epub()"
+- ebook-convert book.epub book.mobi
+- xvfb-run ebook-convert book.epub book.pdf
+branches:
+  only:
+  - master
+notifications:
+  webhooks:
+    urls:
+      - https://unglue.it/api/travisci/webhook
+    on_success: always
+    on_failure: never
+    on_start: never
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: DCgzg+qGpRlBU+Blw73cG0ngEUgl39x3YTmaCstCpQwXz61UJ/iLJ2ZoX9DvP6dpk+ArLoWC3s8LOaZfk2WAb7mcWM91Nhj5TVqcgmHhab/xmgVJbShVadUFsZPnhlBbMosBtct3DnVIWxDvpi93W2IQdRnuNOnfs/C+mYyWlnp/0qYSlBGVmOZYiFB2lDF8FfyDhS3FH7ccVifpg7xAIIdguIGMxHjcNmEP3gALmUGHL31e0Hz9jfu6BHTD+dpQ4Yo68gOMehzW/ZWxe6aEndLq0WhOOg41uyl6VRYUMxUqBQXCB0vFn+4pmfAF9UxgtUyrPHEEb7fM5UndPFfkpM7141cA6Ffv+PXpVSTL+yqbt87n1EZx97Riii6rvOxIi1NCV+SKVN9/SaheWGp9qVGeei93uTQpEpneLsfsYg57dgfvgF4hagLBKrcxqSvgZnj5j82WKy4rXqsa97NGh5c+Zk53fH/xOR2QHVWfAu5XLAryssMgVi9VQc3O0Ca0wZwAxNNzWvD/uHZp5gRd3XTpyPVLTmgZWbuX7W98hUQifJ1SD5vJ2tbDXhDNyj2mDokD8rf/9+ZjQvmMpoWcIMaj+tGUg7K0wDXuwlVSyZnNHgmggZ/wSwA/GlqDaEw8j0zS5bycQII4Qd/nHrcs6emhx4XcDz4rmw7PooUPxwU=
+  file:
+    - book.epub
+    - book.mobi
+    - book.pdf
+  "on":
+    repo: GITenberg/Spinifex-and-Sand--13-A-Narrative-of-Five-Years-Pioneering-and-Exploration-in-Western-Ausralia_4975
+addons:
+  apt:
+    packages:
+    - xsltproc
+    - xvfb
+    - calibre
+    - python-pip
+    - git
+    - python-dev
+    - libjpeg-dev
+    - libpng-dev
+    - libfreetype6
+    - libfreetype6-dev
+    - zlib1g-dev
+    - python-lxml
+    - libxml2-dev
+    - libxslt1-dev
+    - tidy
